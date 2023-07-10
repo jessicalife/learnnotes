@@ -1,0 +1,26 @@
+from math import log, sqrt, exp
+from scipy.stats import norm
+
+def black_scholes(option_type, S, K, r, T, sigma):
+    d1 = (log(S / K) + (r + (sigma**2) / 2) * T) / (sigma * sqrt(T))
+    d2 = d1 - sigma * sqrt(T)
+
+    if option_type == 'call':
+        price = S * norm.cdf(d1) - K * exp(-r * T) * norm.cdf(d2)
+    elif option_type == 'put':
+        price = K * exp(-r * T) * norm.cdf(-d2) - S * norm.cdf(-d1)
+    else:
+        raise ValueError("Invalid option type. Please choose 'call' or 'put'.")
+
+    return price
+
+# Example usage
+option_type = 'call'  # 'call' for call option, 'put' for put option
+S = 100  # Current price of the underlying asset
+K = 105  # Strike price of the option
+r = 0.05  # Risk-free interest rate
+T = 1  # Time to expiration in years
+sigma = 0.2  # Volatility of the underlying asset
+
+option_price = black_scholes(option_type, S, K, r, T, sigma)
+print("Option Price:", option_price)
