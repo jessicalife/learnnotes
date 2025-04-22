@@ -1,0 +1,21 @@
+from PyPDF2 import PdfReader
+
+pdf_path = "your_file.pdf"
+reader = PdfReader(pdf_path)
+
+# 签名信息保存在 /AcroForm 中
+acroform = reader.trailer["/Root"].get("/AcroForm")
+has_signature = False
+
+if acroform and "/Fields" in acroform:
+    fields = acroform["/Fields"]
+    for field in fields:
+        field_obj = field.get_object()
+        if field_obj.get("/FT") == "/Sig":  # 签名字段
+            has_signature = True
+            print("发现电子签名字段！")
+            print(field_obj)
+            break
+
+if not has_signature:
+    print("未发现电子签名。")
