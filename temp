@@ -1,0 +1,32 @@
+import os
+import pdfplumber
+
+# 步骤 1：设定文件夹路径
+folder_path = "/your/folder/path"
+
+# 步骤 2：遍历文件夹中的 PDF 文件
+for filename in os.listdir(folder_path):
+    if filename.lower().endswith(".pdf"):
+        file_path = os.path.join(folder_path, filename)
+        
+        with pdfplumber.open(file_path) as pdf:
+            text_all_pages = ""
+            has_keyword = False
+
+            for page in pdf.pages:
+                text = page.extract_text()
+                if text and "protection note" in text.lower():
+                    has_keyword = True
+                    text_all_pages += text + "\n"
+            
+            # 步骤 3：提取脚注
+            if has_keyword:
+                print(f"\n--- Reading footnotes from: {filename} ---")
+                for page in pdf.pages:
+                    width = page.width
+                    height = page.height
+                    # 脚注区域通常在页面底部 10%
+                    footnote_area = page.within_bbox((0, height * 0.9, width, height))
+                    footnote_text = footnote_area.extract_text()
+                    if footnote_text:
+                        print(footnote_text.strip())
