@@ -1,0 +1,36 @@
+import os
+from PyPDF2 import PdfReader
+
+def extract_footnotes_from_pdf(pdf_path):
+    reader = PdfReader(pdf_path)
+    all_footnotes = []
+    contains_keyword = False
+
+    for page_num, page in enumerate(reader.pages):
+        text = page.extract_text()
+        if not text:
+            continue
+        
+        # 检查是否包含关键字
+        if "protection note" in text.lower():
+            contains_keyword = True
+
+        # 模拟“脚注”：获取页面的最后几行文本
+        lines = text.splitlines()
+        if len(lines) >= 3:
+            footnote = "\n".join(lines[-3:])  # 假设脚注在最后三行
+            all_footnotes.append(f"Page {page_num + 1}:\n{footnote}")
+
+    if contains_keyword:
+        print(f"\n--- Footnotes from: {os.path.basename(pdf_path)} ---")
+        for note in all_footnotes:
+            print(note)
+
+# 设定你的文件夹路径
+folder_path = "/your/folder/path"
+
+# 遍历 PDF 文件
+for filename in os.listdir(folder_path):
+    if filename.lower().endswith(".pdf"):
+        full_path = os.path.join(folder_path, filename)
+        extract_footnotes_from_pdf(full_path)
