@@ -1,0 +1,29 @@
+import re
+import pandas as pd
+
+def extract_tests(df, text_col="test details"):
+    rows = []
+
+    for raw_text in df[text_col].dropna():
+        # 1️⃣ 先把每一个 test 块找出来（一个 test 一整段）
+        test_blocks = re.findall(
+            r'<Test_x0020_Name.*?>.*?</Analytics_x0020_Scripts_x0020_-_x0020_Additional_x0020_Comments>',
+            raw_text,
+            flags=re.S
+        )
+
+        # 2️⃣ 对每一个 test 拆字段
+        for block in test_blocks:
+            def find(pattern):
+                m = re.search(pattern, block, re.S)
+                return m.group(1).strip() if m else None
+
+            rows.append({
+                "Test_Name": find(r'<Test_x0020_Name.*?>(.*?)</Test_x0020_Name>'),
+                "Test_Description": find(r'<TestDescription.*?>(.*?)</TestDescription>'),
+                "Analytics_Comments": find(
+                    r'<Analytics_x0020_Scripts_x0020_-_x0020_Additional_x0020_Comments.*?>(.*?)</Analytics_x0020_Scripts_x0020_-_x0020_Additional_x0020_Comments>'
+                )
+            })
+
+    return pd.DataFrame(rows)
