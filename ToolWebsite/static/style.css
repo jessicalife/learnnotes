@@ -1,0 +1,89 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; background-color: #f4f7f6; display: flex; flex-direction: column; height: 100vh;
+}
+
+/* 调整标题区域 */
+header {
+    background: #fff; 
+    padding: 15px 30px; 
+    border-bottom: 1px solid #ddd;
+}
+
+header h1 {
+    font-size: 22px; /* 把大标题稍微改小一点 (原默认大概是32px) */
+    margin: 0 0 5px 0; /* 减小下边距，让小标题贴近 */
+    color: #2d3748;
+}
+
+header .subtitle {
+    font-size: 14px;
+    color: #718096; /* 灰色的小标题，显得高级 */
+    margin: 0;
+    font-weight: 500;
+}
+
+.main-container {
+    display: flex; flex: 1; overflow: hidden;
+}
+
+/* 左侧栏参考 PIC1 */
+.sidebar {
+    width: 300px; background: #eaeff2; padding: 20px; border-right: 1px solid #ccc;
+}
+
+/* 在这里加上红色的竖线 */
+.input-group {
+    background: white; 
+    padding: 15px; 
+    border-radius: 8px; 
+    margin-bottom: 20px; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border-left: 5px solid #e53e3e; /* 这就是那条红色的装饰竖线 */
+}
+
+/* 调整带有Emoji的标题 */
+.input-group h3 { 
+    font-size: 15px; 
+    margin-top: 0; 
+    color: #333; 
+    display: flex;       /* 让Emoji和文字垂直居中对齐 */
+    align-items: center; 
+    gap: 8px;            /* Emoji和文字之间的间距 */
+}
+
+input {
+    width: 70%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;
+}
+
+button {
+    padding: 8px 12px; cursor: pointer; border-radius: 4px; border: none; background: #5a67d8; color: white; transition: background 0.2s;
+}
+
+button:hover {
+    background: #4c51bf; /* 鼠标悬浮时按钮颜色稍微变深 */
+}
+
+/* 中间区域 */
+.content-area {
+    flex: 1; display: flex; flex-direction: column; padding: 20px;
+}
+
+.top-tabs { margin-bottom: 10px; }
+.tab-btn { background: #e2e8f0; color: #4a5568; margin-right: 5px; }
+.tab-btn:hover { background: #cbd5e0; }
+
+#display-table-container {
+    flex: 1; background: white; border-radius: 8px; border: 1px solid #ddd; overflow: auto;
+}
+
+table { width: 100%; border-collapse: collapse; }
+th, td { border: 1px solid #eee; padding: 12px; text-align: left; }
+th { background: #f8fafc; position: sticky; top: 0; /* 表头固定不动 */ } 
+
+/* 右侧按钮 */
+.control-panel { width: 150px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+.action-btn { background: #718096; }
+.action-btn:hover { background: #4a5568; }
+.action-btn.export { background: #48bb78; }
+.action-btn.export:hover { background: #38a169; }
