@@ -1,0 +1,36 @@
+        function renderTable(data) {
+            const header = document.getElementById('table-header');
+            const body = document.getElementById('table-body');
+            header.innerHTML = ''; body.innerHTML = '';
+            
+            if (data.length > 0) {
+                // 生成表头
+                Object.keys(data[0]).forEach(key => {
+                    header.innerHTML += `<th>${key}</th>`;
+                });
+                
+                // 性能优化核心：限制最大渲染行数
+                const MAX_ROWS = 100; 
+                const rowsToRender = data.slice(0, MAX_ROWS); // 只取前 100 行
+
+                // 生成表格内容
+                rowsToRender.forEach(row => {
+                    let tr = '<tr>';
+                    Object.values(row).forEach(val => tr += `<td>${val}</td>`);
+                    body.innerHTML += tr + '</tr>';
+                });
+
+                // 如果原始数据超过限制，在底部加上提示
+                if (data.length > MAX_ROWS) {
+                    body.innerHTML += `
+                        <tr>
+                            <td colspan="100%" style="text-align:center; padding: 15px; color: #e53e3e; font-weight: bold; background: #fff5f5;">
+                                ⚠️ Showing top ${MAX_ROWS} rows out of ${data.length} total rows. To view all data, please click "Export Result".
+                            </td>
+                        </tr>
+                    `;
+                }
+            } else {
+                 body.innerHTML = '<tr><td colspan="100%" style="text-align:center;">No data found</td></tr>';
+            }
+        }
