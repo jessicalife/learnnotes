@@ -1,0 +1,32 @@
+/* 修改点 1：确保容器本身可以被正确限制大小并生成滚动条 */
+#display-table-container {
+    flex: 1; 
+    background: white; 
+    border-radius: 8px; 
+    border: 1px solid #ddd; 
+    overflow: auto; /* 关键：内容超出时自动出现滚动条 */
+    min-height: 0;  /* 关键：防止 flex 子元素在内容过多时撑破父容器 */
+}
+
+/* 修改点 2：表格宽度设置 */
+table { 
+    min-width: 100%; /* 不再写死 width: 100%，让它根据内容自然往右撑开 */
+    border-collapse: collapse; 
+}
+
+/* 修改点 3：强制不换行 */
+th, td { 
+    border: 1px solid #eee; 
+    padding: 12px; 
+    text-align: left; 
+    white-space: nowrap; /* 关键核心：强制单元格文字不换行，这样列数多时就会触发横向滚动条 */
+}
+
+/* 修改点 4：强化固定表头 */
+th { 
+    background: #f8fafc; 
+    position: sticky; 
+    top: 0; /* 表头吸顶不动 */
+    z-index: 10; /* 关键：设置层级，确保往下滚动时，数据行不会盖住表头 */
+    box-shadow: 0 2px 2px -1px rgba(0,0,0,0.1); /* 加个很淡的底部阴影，滚动时立体感更强，区分表头和数据 */
+}
