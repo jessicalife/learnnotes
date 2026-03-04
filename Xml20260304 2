@@ -1,0 +1,35 @@
+import xml.etree.ElementTree as ET
+import pandas as pd
+import html
+
+def extract_xml_fields(df, id_col="ID", text_col="test details"):
+    rows = []
+
+    for _, row in df.iterrows():
+        record_id = row[id_col]
+        raw_text = row[text_col]
+
+        if pd.isna(raw_text):
+            continue
+
+        try:
+            cleaned_text = html.unescape(raw_text)
+
+            # 🔥 关键：人为包一层 root
+            wrapped_xml = f"<ROOT>{cleaned_text}</ROOT>"
+
+            root = ET.fromstring(wrapped_xml)
+
+            for item in root.findall(".//Item"):
+                rows.append({
+                    "ID": record_id,
+                    "System_Name": item.findtext("System_x0020_Name"),
+                    "System_EID": item.findtext("System_x0020_EID"),
+                    "Source_File": item.findtext("Table_x0020__x002F__x0020_Source_x0020_Name"),
+                    "Validation_Text": item.findtext("Validation_x0020_of_x0020_completeness_x0020_of_x0020_data")
+                })
+
+        except Exception as e:
+            print(f"XML parse error for ID {record_id}: {e}")
+
+    return pd.DataFrame(rows)
