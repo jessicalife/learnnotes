@@ -1,0 +1,29 @@
+I have provided a sample transaction dataset in Excel.
+
+Analyze the transaction patterns for the existing customers, including:
+
+Transaction frequency
+Date distribution
+Amount distribution
+Merchant descriptions
+Transaction categories
+Debit/credit behavior
+Any recurring payment patterns
+
+Generate a synthetic dataset for customer ID cust011 that follows similar behavioral patterns while ensuring all records are fictional.
+
+Requirements:
+
+Customer ID: cust011
+Transaction period: 2026-06-01 to 2026-06-30
+Number of transactions: 50
+Transaction amount range: 100 to 5,000
+Preserve the exact same column structure and column names as the source file
+Generate realistic values for all fields based on the observed patterns
+Dates should be distributed naturally throughout the month
+Amounts should follow a similar distribution to the sample data rather than being uniformly random
+Merchant names, categories, and descriptions should resemble the style of the source data
+Ensure transaction IDs are unique
+Avoid exact duplication of any source records
+
+Return only the generated table in CSV format.
