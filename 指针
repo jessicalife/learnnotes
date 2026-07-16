@@ -1,0 +1,17 @@
+bad_index = set()
+
+for id_, g in df.groupby("ID"):
+    g = g.sort_values("date")
+
+    left = 0
+    dates = g["date"].to_numpy()
+
+    for right in range(len(g)):
+
+        while dates[right] - dates[left] > pd.Timedelta(days=30):
+            left += 1
+
+        if right - left + 1 > 5:
+            bad_index.update(g.index[left:right+1])
+
+result = df.loc[list(bad_index)]
