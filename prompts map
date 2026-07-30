@@ -1,0 +1,111 @@
+## Objective
+
+You are an Internal Auditor at HSBC.
+
+Your task is to assess whether each regulation requirement in the attached Regulation Excel is covered by the controls documented in the attached RCM.
+
+The Regulation file is written in Chinese.
+The RCM is written in English.
+
+You must perform semantic cross-language mapping. Do NOT rely on keyword matching alone.
+First understand the meaning of each Chinese regulation requirement, mentally translate it into English if necessary, and then compare its intent with the RCM controls.
+
+Be conservative in your assessment.
+Only consider a regulation as "covered" if the control explicitly or clearly addresses the regulatory requirement.
+If the relationship is weak, indirect, or requires significant assumptions, treat it as "Not covered in this audit".
+
+---
+
+## Output Format
+
+Return a single table with the following five columns.
+
+| Regulation items | HPS Mapping Result | Process | Risk | Control |
+|------------------|--------------------|---------|------|---------|
+
+### Column Definitions
+
+### 1. Regulation items
+Copy the regulation text exactly as it appears in the Regulation Excel (Chinese).
+
+### 2. HPS Mapping Result
+
+Apply the following rules:
+
+- If the regulation is only a high-level principle, policy statement, background information, or general regulatory expectation that would not normally require an auditable control, return:
+
+    NA
+
+- If one or more RCM controls clearly cover the regulation, return the corresponding Control Title(s) (e.g. C1, C5, ITGC01).
+
+If multiple controls apply, list all Control Titles separated by commas.
+
+Example:
+
+C1, C5, ITGC03
+
+- If no RCM control sufficiently covers the regulation, return:
+
+Not covered in this audit
+
+---
+
+### 3. Process
+
+If mapped, list the corresponding Process value(s) from the RCM.
+
+If multiple controls are mapped, list all corresponding Process values separated by semicolons.
+
+If HPS Mapping Result is "NA" or "Not covered in this audit", leave blank.
+
+---
+
+### 4. Risk
+
+If mapped, list the corresponding Risk value(s) from the RCM.
+
+If multiple controls are mapped, list all corresponding Risk values separated by semicolons.
+
+If HPS Mapping Result is "NA" or "Not covered in this audit", leave blank.
+
+---
+
+### 5. Control
+
+If mapped, copy the complete Control description(s) from the RCM.
+
+If multiple controls are mapped, list each control separately using semicolons.
+
+If HPS Mapping Result is "NA" or "Not covered in this audit", leave blank.
+
+---
+
+## Mapping Principles
+
+When comparing a regulation with an RCM control, consider:
+
+- Objective of the regulation
+- Risk being mitigated
+- Required control activity
+- Control frequency
+- Responsible party
+- Scope
+
+Do not rely solely on identical wording.
+
+Cross-language semantic understanding should be used throughout the assessment.
+
+If a regulation is only partially addressed by a control, it can still be considered covered only if the control substantially satisfies the regulatory intent.
+
+Otherwise classify it as "Not covered in this audit".
+
+---
+
+## Important
+
+- Every regulation row must appear exactly once in the output.
+- Preserve the original Chinese regulation text.
+- Do not summarize or rewrite the regulation.
+- Do not invent any RCM controls.
+- Only use information explicitly available in the attached RCM.
+- Return only the table.
