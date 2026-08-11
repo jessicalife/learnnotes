@@ -1,0 +1,35 @@
+import pandas as pd
+import json
+
+def get_json_value(text, key):
+    try:
+        if pd.isna(text):
+            return None
+
+        data = json.loads(text)
+        return data.get(key)
+
+    except (json.JSONDecodeError, TypeError):
+        return None
+
+
+df['SUPERVISOR_ATTEND'] = df.apply(
+    lambda row: get_json_value(row['CMNT_TEXT'], 'attend')
+    if row['CMNT_TYPE'] == 'SUPERVISOR'
+    else None,
+    axis=1
+)
+
+df['SUPERVISOR_OTHER'] = df.apply(
+    lambda row: get_json_value(row['CMNT_TEXT'], 'other')
+    if row['CMNT_TYPE'] == 'SUPERVISOR'
+    else None,
+    axis=1
+)
+
+df['COMPANION_ACCOMPANIED'] = df.apply(
+    lambda row: get_json_value(row['CMNT_TEXT'], 'accompanied')
+    if row['CMNT_TYPE'] == 'COMPANIONS'
+    else None,
+    axis=1
+)
