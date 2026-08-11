@@ -1,0 +1,177 @@
+import pandas as pd
+import numpy as np
+import json
+import re
+
+
+# -------------------------
+# 1. 解析 cmnt_text JSON
+# -------------------------
+def safe_loads(text):
+    try:
+        return json.loads(text) if pd.notna(text) else {}
+    except (json.JSONDecodeError, TypeError):
+        return {}
+
+
+goal_comment = goal_comment.copy()
+
+goal_comment["_json"] = goal_comment["cmnt_text"].apply(safe_loads)
+
+
+# -------------------------
+# 2. supervisor
+# -------------------------
+goal_comment["supervisor_attend"] = np.where(
+    goal_comment["cmnt_type"] == "SUPERVISOR",
+    goal_comment["_json"].apply(lambda x: x.get("attend")),
+    None
+)
+
+goal_comment["supervisor_other"] = np.where(
+    goal_comment["cmnt_type"] == "SUPERVISOR",
+    goal_comment["_json"].apply(lambda x: x.get("other")),
+    None
+)
+
+
+# -------------------------
+# 3. companions
+# -------------------------
+goal_comment["companion_accompanied"] = np.where(
+    goal_comment["cmnt_type"] == "COMPANIONS",
+    goal_comment["_json"].apply(lambda x: x.get("accompanied")),
+    None
+)
+
+
+goal_comment["companion_attendee_comment"] = np.where(
+    goal_comment["cmnt_type"] == "COMPANIONS",
+    goal_comment["_json"].apply(
+        lambda x:
+        x.get("accompaniedBy")[0].get("attendeeComment")
+        if isinstance(x.get("accompaniedBy"), list)
+        and len(x.get("accompaniedBy")) > 0
+        else None
+    ),
+    None
+)
+
+
+# -------------------------
+# 4. meeting_date
+# 对应 SQL:
+# accompaniedBy[0].meetingDate
+# 如果取不到，再用 regex
+# -------------------------
+meeting_date_json = goal_comment["_json"].apply(
+    lambda x:
+    x.get("accompaniedBy")[0].get("meetingDate")
+    if isinstance(x.get("accompaniedBy"), list)
+    and len(x.get("accompaniedBy")) > 0
+    else None
+)
+
+meeting_date_json = meeting_date_json.apply(
+    lambda x: x[:10] if isinstance(x, str) else None
+)
+
+meeting_date_regex = goal_comment["cmnt_text"].str.extract(
+    r'"meetingDate"\s*:\s*"(\d{4}-\d{2}-\d{2})"',
+    expand=False
+)
+
+goal_comment["meeting_date"] = pd.to_datetime(
+    meeting_date_json.fillna(meeting_date_regex),
+    format="%Y-%m-%d",
+    errors="coerce"
+)
+
+
+# -------------------------
+# 5. meeting_cnt
+# -------------------------
+def get_meeting_cnt(row):
+
+    j = row["_json"]
+    text = row["cmnt_text"]
+
+    accompanied_by = j.get("accompaniedBy")
+
+    # 对应：
+    # cmnt_type = 'COMPANIONS'
+    # AND accompaniedBy IS NOT NULL
+    if (
+        row["cmnt_type"] == "COMPANIONS"
+        and accompanied_by is not None
+    ):
+
+        if isinstance(accompanied_by, list):
+            return sum(
+                1
+                for elem in accompanied_by
+                if isinstance(elem, dict)
+                and elem.get("meetingDate") is not None
+            )
+
+        return 0
+
+    # fallback：regex 找到 meetingDate 就返回 1
+    if (
+        isinstance(text, str)
+        and re.search(
+            r'"meetingDate"\s*:\s*"\d{4}-\d{2}-\d{2}',
+            text
+        )
+    ):
+        return 1
+
+    return 0
+
+
+goal_comment["meeting_cnt"] = goal_comment.apply(
+    get_meeting_cnt,
+    axis=1
+)
+
+
+# -------------------------
+# 6. 其他字段
+# -------------------------
+goal_comment["rec_creat_dt_tm"] = pd.to_datetime(
+    goal_comment["rec_creat_dt_tm"],
+    errors="coerce"
+)
+
+goal_comment["_user_creat_num_str"] = (
+    goal_comment["user_creat_num"]
+    .astype("string")
+)
+
+
+# -------------------------
+# 7. GROUP BY
+# 对应 comment_agg CTE
+# -------------------------
+comment_agg = (
+    goal_comment
+    .groupby(
+        ["arr_id_fin_plan", "goal_seq_num"],
+        as_index=False,
+        dropna=False
+    )
+    .agg(
+        supervisor_attend=("supervisor_attend", "max"),
+        supervisor_other=("supervisor_other", "max"),
+        companion_accompanied=("companion_accompanied", "max"),
+        companion_attendee_comment=("companion_attendee_comment", "max"),
+
+        meeting_date=("meeting_date", "max"),
+        meeting_cnt=("meeting_cnt", "max"),
+
+        last_cmnt_rec_creat_ts=("rec_creat_dt_tm", "max"),
+
+        any_cmnt_user_creat_num=("_user_creat_num_str", "first"),
+        any_cmnt_emply_name=("emply_name", "first")
+    )
+)
