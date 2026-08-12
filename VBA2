@@ -1,0 +1,72 @@
+Sub CollapseRowsBasedOnColumnA()
+
+    Dim ws As Worksheet
+    Dim lastRow As Long
+    Dim i As Long
+    Dim firstRow As Long
+    Dim rowCount As Long
+    Dim j As Long
+    
+    Dim aValue As Variant
+    Dim combinedText As String
+    Dim mergeArea As Range
+    
+    Set ws = ActiveSheet
+    
+    lastRow = ws.Cells(ws.Rows.Count, "A").End(xlUp).Row
+
+    ' 一定要从下往上处理
+    For i = lastRow To 1 Step -1
+        
+        If ws.Cells(i, "A").MergeCells Then
+            
+            Set mergeArea = ws.Cells(i, "A").MergeArea
+            
+            firstRow = mergeArea.Row
+            rowCount = mergeArea.Rows.Count
+            
+            ' 只处理合并区域第一行
+            If i = firstRow Then
+                
+                ' 保存A列原来的值
+                aValue = ws.Cells(firstRow, "A").Value
+                
+                ' 拼接B列
+                combinedText = ""
+                
+                For j = firstRow To firstRow + rowCount - 1
+                    
+                    If ws.Cells(j, "B").Value <> "" Then
+                        
+                        If combinedText <> "" Then
+                            combinedText = combinedText & Chr(10)
+                        End If
+                        
+                        combinedText = combinedText & ws.Cells(j, "B").Value
+                        
+                    End If
+                    
+                Next j
+                
+                ' 取消A列合并
+                mergeArea.UnMerge
+                
+                ' 写回A和B
+                ws.Cells(firstRow, "A").Value = aValue
+                ws.Cells(firstRow, "B").Value = combinedText
+                
+                ws.Cells(firstRow, "B").WrapText = True
+                
+                ' 删除多余的行
+                If rowCount > 1 Then
+                    ws.Rows((firstRow + 1) & ":" & _
+                            (firstRow + rowCount - 1)).Delete
+                End If
+                
+            End If
+            
+        End If
+        
+    Next i
+
+End Sub
