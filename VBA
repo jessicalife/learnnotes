@@ -1,0 +1,63 @@
+Sub MergeBAccordingToA()
+
+    Dim ws As Worksheet
+    Dim cell As Range
+    Dim mergeArea As Range
+    Dim firstRow As Long
+    Dim lastRow As Long
+    Dim i As Long
+    Dim combinedText As String
+    Dim targetRange As Range
+    
+    Set ws = ActiveSheet
+
+    For Each cell In ws.Range("A1:A" & ws.Cells(ws.Rows.Count, "A").End(xlUp).Row)
+
+        If cell.MergeCells Then
+            
+            Set mergeArea = cell.MergeArea
+            
+            ' 只在每个合并区域的第一个单元格执行一次
+            If cell.Address = mergeArea.Cells(1, 1).Address Then
+                
+                firstRow = mergeArea.Row
+                lastRow = mergeArea.Row + mergeArea.Rows.Count - 1
+                
+                combinedText = ""
+                
+                ' 把B列对应行的文字拼起来
+                For i = firstRow To lastRow
+                    
+                    If ws.Cells(i, "B").Value <> "" Then
+                        
+                        If combinedText <> "" Then
+                            combinedText = combinedText & Chr(10)
+                        End If
+                        
+                        combinedText = combinedText & ws.Cells(i, "B").Value
+                        
+                    End If
+                    
+                Next i
+                
+                ' B列按照A列相同范围合并
+                Set targetRange = ws.Range(ws.Cells(firstRow, "B"), ws.Cells(lastRow, "B"))
+                
+                targetRange.UnMerge
+                
+                ws.Cells(firstRow, "B").Value = combinedText
+                
+                targetRange.Merge
+                
+                With ws.Cells(firstRow, "B")
+                    .WrapText = True
+                    .VerticalAlignment = xlTop
+                End With
+                
+            End If
+            
+        End If
+
+    Next cell
+
+End Sub
