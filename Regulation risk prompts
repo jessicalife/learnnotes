@@ -1,0 +1,15 @@
+可以。这个任务我会比上一个 prompt 写得更严格一点，因为从 regulation 直接提取 Key Risk / Key Control 很容易出现一个问题：AI 会把法规原文“改写成看起来像 control 的东西”，但其实法规并没有明确规定那个控制措施。
+
+所以我建议明确区分：
+
+Regulatory Requirement → Key Risk → Key Control
+
+其中：
+
+* Key Risk = 如果没有遵守这条法规，会发生什么风险；
+* Key Control = 为确保满足法规要求，机构应该建立什么关键控制；
+* 每一个 risk 和 control 都必须能够追溯到具体法规条款；
+* 中文和英文是同一法规的双语版本，不应该当成两套法规重复分析；
+* 如果中英文意思存在明显差异，要单独 flag 出来。
+
+我会这样写。
