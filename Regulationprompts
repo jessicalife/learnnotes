@@ -1,0 +1,172 @@
+You are reviewing a bilingual regulatory document provided in Word format. The document contains the Chinese regulatory text on the left and the corresponding English translation on the right.
+
+Your task is to read and understand the regulation and identify the Key Risks and Key Controls arising from the regulatory requirements.
+
+1. Read and interpret the regulation
+
+Review the regulation section by section.
+
+Treat the Chinese and English text as two language versions of the same regulatory requirement, rather than as separate requirements.
+
+Use both versions to understand the intended meaning. Where there is any material difference, ambiguity, or inconsistency between the Chinese and English versions, highlight it separately.
+
+2. Identify regulatory requirements
+
+Identify the regulatory provisions that create material obligations, requirements, restrictions, responsibilities, or expectations for the regulated entity.
+
+Focus on requirements that could result in meaningful regulatory, compliance, conduct, operational, financial, customer, or reputational exposure if not properly complied with.
+
+Do not treat purely descriptive, definitional, administrative, or background text as a Key Risk unless it creates a substantive obligation.
+
+3. Identify the Key Risk
+
+For each material regulatory requirement, identify the underlying Key Risk.
+
+A Key Risk should describe what could go wrong if the regulatory requirement is not complied with.
+
+The risk should:
+
+* be directly linked to the regulatory requirement;
+* describe the potential failure or exposure rather than simply repeat the regulation;
+* be specific enough to explain the compliance concern;
+* focus on the most material risk rather than minor procedural issues.
+
+Where multiple regulatory clauses address the same underlying risk, consolidate them into one Key Risk where appropriate and reference all relevant clauses.
+
+4. Identify the Key Control
+
+For each Key Risk, identify the Key Control that should mitigate the risk and support compliance with the regulatory requirement.
+
+A Key Control should describe the core mechanism that would prevent, detect, or correct the regulatory risk.
+
+The control should, where relevant, explain:
+
+* What needs to be performed;
+* Who should be responsible;
+* When / how frequently it should be performed;
+* How compliance is checked or evidenced;
+* What happens when an exception is identified.
+
+Do not invent specific systems, teams, approval thresholds, frequencies, or processes unless they are stated in or reasonably supported by the regulation.
+
+If the regulation establishes an obligation but does not specify how the organisation should operationalise it, describe the control at a principle-based level rather than inventing detailed procedures.
+
+5. Maintain traceability
+
+Every Key Risk and Key Control must be traceable back to the relevant regulatory provision.
+
+For each item, provide:
+
+Field	Output
+Regulation Reference	Article / section / paragraph number or other identifiable reference
+Regulatory Requirement	Concise summary of what the regulation requires
+Key Risk	What could go wrong if the requirement is not complied with
+Key Control	The key control that should mitigate the identified risk
+Control Type	Preventive / Detective / Corrective, where applicable
+Source Text	Relevant wording or a concise extract from the regulation
+Language Issue	Any material discrepancy or ambiguity between the Chinese and English versions; otherwise “None”
+
+Important principles
+
+* Base the analysis only on the uploaded regulation.
+* Do not introduce requirements that are not stated or reasonably implied by the regulation.
+* Do not confuse a regulatory requirement with a risk.
+* Do not simply rewrite the regulatory requirement as a control.
+* Avoid creating multiple risks that represent essentially the same underlying risk.
+* Avoid creating overly detailed or operational controls unless the regulation supports that level of detail.
+* Prioritise material Key Risks and Key Controls, rather than attempting to convert every sentence into a separate risk and control.
+* Use clear, concise, professional language suitable for a Regulatory Compliance / Risk and Control Matrix.
+
+你正在审核一份 Word 格式的中英双语法规文件。文件左侧为法规中文原文，右侧为对应的英文版本。
+
+你的任务是完整阅读并理解该法规，从法规要求中识别出相应的 Key Risk（关键风险） 和 Key Control（关键控制）。
+
+1. 阅读并理解法规
+
+请逐章节、逐条款阅读法规。
+
+中文和英文应被视为同一项法规要求的两个语言版本，不要将其作为两套不同的法规要求重复分析。
+
+请同时参考中英文内容理解法规的实际含义。如果中文和英文之间存在重要的含义差异、歧义或不一致，请单独标识出来。
+
+2. 识别 Regulatory Requirement
+
+识别法规中对受监管机构提出的重要：
+
+* 义务；
+* 要求；
+* 限制；
+* 责任；
+* 或监管期望。
+
+重点关注如果未能遵守，可能导致重大监管、合规、操守、运营、财务、客户或声誉风险的法规要求。
+
+对于仅属于背景介绍、定义、解释或行政性描述、且没有形成实质性义务的内容，不需要单独识别为 Key Risk。
+
+3. 识别 Key Risk
+
+针对每一项重要法规要求，识别其背后的 Key Risk。
+
+Key Risk 应回答：
+
+“如果机构没有遵守这项法规要求，可能会发生什么问题？”
+
+Key Risk 应满足以下要求：
+
+* 与具体法规要求直接相关；
+* 描述潜在的失败、违规或风险，而不是简单重复法规原文；
+* 足够具体，能够清楚说明主要的合规风险；
+* 聚焦于具有实质影响的关键风险，而不是非常细小的流程问题。
+
+如果多个法规条款实际上对应同一个底层风险，应在适当情况下进行合并，并列出所有相关法规条款，而不是人为拆分成多个重复的 Key Risk。
+
+4. 识别 Key Control
+
+针对每一个 Key Risk，识别能够降低该风险并支持法规合规的 Key Control。
+
+Key Control 应描述用于预防、发现或纠正该风险的核心控制机制。
+
+在法规提供足够信息的情况下，Key Control 可考虑说明：
+
+* What：需要执行什么控制；
+* Who：由谁负责；
+* When / Frequency：何时或多长时间执行一次；
+* How：如何检查并证明法规要求得到遵守；
+* Exception Handling：如果发现异常或不合规情况，应如何处理。
+
+不要自行虚构法规中没有提供依据的：
+
+* 系统名称；
+* 部门或团队；
+* 审批层级；
+* 金额阈值；
+* 检查频率；
+* 或具体操作流程。
+
+如果法规只规定了机构必须达到的要求，但没有规定具体应该如何执行，请将 Key Control 写成原则性控制（principle-based control），不要自行设计过于具体的内部流程。
+
+5. 保持法规追溯性
+
+每一个 Key Risk 和 Key Control 都必须能够追溯到具体的法规条款。
+
+请按照以下格式输出：
+
+字段	内容
+Regulation Reference	对应的法规章节、条款、段落编号或其他可识别位置
+Regulatory Requirement	简洁概括该法规要求机构必须做什么
+Key Risk	如果未满足该法规要求，可能发生什么风险
+Key Control	用于降低该风险并确保法规合规的关键控制
+Control Type	Preventive / Detective / Corrective（如适用）
+Source Text	对应法规原文或简洁的相关原文摘录
+Language Issue	中英文版本是否存在重要差异或歧义；如无，请填写 “None”
+
+重要原则
+
+* 所有分析必须仅基于上传的法规文件。
+* 不要加入法规中没有明确规定或无法合理推导出的要求。
+* 不要把 Regulatory Requirement 和 Key Risk 混为一谈。
+* 不要只是将法规要求换一种说法后直接作为 Key Control。
+* 对本质相同的风险尽量进行合并，避免产生大量重复 Key Risk。
+* 除非法规本身提供了足够依据，否则不要设计过于具体的操作层面 Control。
+* 重点提取真正重要的 Key Risks 和 Key Controls，不要机械地将法规中的每一句话都转换成一个 Risk 和 Control。
+* 使用简洁、专业的语言，输出内容应适合直接用于 Regulatory Compliance / Risk and Control Matrix (RCM)。
