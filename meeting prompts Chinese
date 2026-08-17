@@ -1,0 +1,62 @@
+你正在审核一份 Governance Pack。
+
+请定位其中标题为 “Meeting Minutes of Previous Meeting” 的部分。
+
+该部分包含 Summary 和 Action。你的任务是判断每一项 Action 是否与其对应的 Summary 一致，并且是否准确反映了 Summary 中所记录的会议决定和后续要求。
+
+对于每一组 Summary 和 Action，请执行以下步骤：
+
+1. 仔细阅读完整的 Summary，并识别其中的：
+    * 会议决定；
+    * 后续任务或承诺事项；
+    * 要求或指示；
+    * 责任人或负责方（如有）；
+    * 截止日期或时间安排（如有）；
+    * 预期交付物或结果（如有）。
+2. 将对应的 Action 与 Summary 进行比较。
+3. 根据比较结果，将其分类为：
+    * Consistent（一致）：Action 准确反映了 Summary 中相关的后续要求；
+    * Partially Consistent（部分一致）：Action 基本反映了 Summary，但遗漏、改变或未完整涵盖某项重要要求；
+    * Inconsistent（不一致）：Action 与 Summary 存在冲突、对应了不同事项，或者实质性错误描述了会议决定；
+    * Missing Action（缺失 Action）：Summary 中存在明确的后续行动要求，但没有对应的 Action；
+    * Unsupported Action（缺乏依据的 Action）：Action 中包含了 Summary 未提及或无法合理推导出的任务、承诺、责任人、截止日期或交付物。
+
+判断时应比较 实际含义和意图，而不仅仅是关键词或文字是否完全相同。
+
+请重点检查：
+
+* Action 中的任务是否与 Summary 中要求的任务相同；
+* Action 的范围是否与 Summary 一致；
+* 责任人或负责方是否一致；
+* 截止日期或时间安排是否一致；
+* 预期结果或交付物是否一致；
+* Summary 中是否存在重要内容未被 Action 覆盖；
+* Action 是否加入了 Summary 中没有提及或无法合理推导出的内容。
+
+不要根据常识自行补充或假设 Governance Pack 中没有提供的信息。
+
+对于每一组 Summary 和 Action，请按照以下格式输出：
+
+Summary：
+[简要描述 Summary 中与 Action 相关的内容]
+
+Action：
+[简要描述对应的 Action]
+
+Assessment：
+[Consistent / Partially Consistent / Inconsistent / Missing Action / Unsupported Action]
+
+Reason：
+[简洁说明为什么该 Action 与 Summary 一致或不一致]
+
+Issue Identified：
+[明确指出具体的遗漏、差异、冲突或缺乏依据的信息；如无问题，请写 “None”]
+
+最后，请提供整体统计，包括：
+
+* 共检查多少组 Summary–Action；
+* Consistent 的数量；
+* Partially Consistent 的数量；
+* Inconsistent 的数量；
+* Missing Action 的数量；
+* Unsupported Action 的数量。
