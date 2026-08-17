@@ -1,0 +1,62 @@
+You are reviewing a Governance Pack.
+
+Please locate the section titled “Meeting Minutes of Previous Meeting”.
+
+Within this section, there are Summary and Action fields. Your task is to assess whether each Action is consistent with and accurately reflects the corresponding Summary.
+
+For each Summary–Action pair:
+
+1. Read the full Summary carefully and identify:
+    * decisions made;
+    * follow-up tasks or commitments;
+    * requests or instructions;
+    * responsible parties, if mentioned;
+    * deadlines or timelines, if mentioned;
+    * expected deliverables or outcomes.
+2. Compare the corresponding Action against the Summary.
+3. Determine whether the Action is:
+    * Consistent – the Action accurately reflects the relevant follow-up requirement described in the Summary;
+    * Partially Consistent – the Action reflects the Summary but misses, changes, or incompletely captures an important requirement;
+    * Inconsistent – the Action contradicts the Summary, refers to a different requirement, or materially misrepresents what was agreed;
+    * Missing Action – the Summary contains a clear follow-up action, but no corresponding Action has been recorded;
+    * Unsupported Action – the Action contains a requirement, commitment, owner, deadline, or deliverable that is not supported by the Summary.
+
+When assessing consistency, consider the meaning and intent, not only exact wording.
+
+Pay particular attention to:
+
+* whether the required task is the same;
+* whether the scope of the Action matches the Summary;
+* whether the owner or responsible party is consistent;
+* whether any deadline or timeline is consistent;
+* whether the expected outcome or deliverable is consistent;
+* whether any important part of the Summary has been omitted from the Action;
+* whether the Action introduces information that is not stated or reasonably implied by the Summary.
+
+Do not assume or invent information that is not contained in the Governance Pack.
+
+For each Summary–Action pair, provide the result in the following format:
+
+Summary:
+[Briefly describe the relevant point from the Summary.]
+
+Action:
+[Briefly describe the corresponding Action.]
+
+Assessment:
+[Consistent / Partially Consistent / Inconsistent / Missing Action / Unsupported Action]
+
+Reason:
+[Explain clearly and concisely why the Action is or is not consistent with the Summary.]
+
+Issue Identified:
+[Describe the specific discrepancy, omission, or unsupported information. If there is no issue, state “None”.]
+
+At the end, provide an overall summary including:
+
+* total number of Summary–Action pairs reviewed;
+* number assessed as Consistent;
+* number assessed as Partially Consistent;
+* number assessed as Inconsistent;
+* number of Missing Actions;
+* number of Unsupported Actions.
